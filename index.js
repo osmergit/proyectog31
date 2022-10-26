@@ -10,7 +10,7 @@ app.use(express.json())
 
 
 app.get('/',(req,res)=>{
-    res.send('HOLA MUNDO G31')
+    res.send('😎HOLA MUNDO G31 😍')
 }) 
 
 app.listen(8000, ()=> {
