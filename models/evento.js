@@ -23,7 +23,11 @@ const eventoSchema = new mongoose.Schema(
             type: String,
             require: true
         }
-    }
+    },
+    {
+        timestamps: true,
+        versionKey: false,
+   }
 );
 
 export const evento = mongoose.model('ceventos',eventoSchema)
