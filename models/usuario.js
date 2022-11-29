@@ -90,16 +90,14 @@ function login(correo,password) {
             throw new Error('El correo no corresponde');
            
         }
-         // if (!user.emailVerified) throw new Error('user is not verified');
+       
          console.log('El valor del password es:', password);
           const isMatch = bcrypt.compareSync(password, usuario.password);
           console.log('El valor de la comparación del password es:',isMatch);
           if (isMatch) {return true}
           else{return false};
-         // if (!isMatch) throw new Error('El password es incorrecto');
-         // if (!isMatch) return res.status(403).send({ success: false, message: 'Usuario no autorizado' });
-        
-        
+         
+              
     
     })}}
   

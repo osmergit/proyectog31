@@ -2,12 +2,21 @@ import jwt from "jsonwebtoken";
 import { tokenVerificationErrors } from "../configs/jwtfunciones.js";
 
 export const requireToken = (req, res, next) => {
+  
     try {
-        let token = req.headers?.authorization;
-
-        if (!token) throw new Error("No Bearer");
-
-        token = token.split(" ")[1];
+        //let token = req.headers?.authorization;
+       // const token = localStorage.getItem("auth");
+       let token = req.headers?.authorization;
+       if (!token) throw new Error("No Bearer");
+     //let token = req.headers('x-auth-token');
+       
+     //if (!token) throw new Error("No Bearer");
+ 
+     console.log(req.headers);
+     if (!token) {
+         res.status(400).json({msj : "Token no encontrado"});
+     }
+       token = token.split(" ")[1];
         const { uid } = jwt.verify(token, process.env.JWTPRIVATEKEY);
 
         req.uid = uid;
