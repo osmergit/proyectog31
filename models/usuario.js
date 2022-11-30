@@ -22,9 +22,6 @@ const userSchema = new mongoose.Schema(
             type: Boolean,
             default: false,
             }
-      
-        
-
     },
     {
         timestamps: true,
@@ -32,30 +29,9 @@ const userSchema = new mongoose.Schema(
    }
 );
 
-/*
-userSchema.pre("save", async function (next) {
-    const user = this;
-
-    if (!user.isModified("password")) return next();
-
-    try {
-        const salt = await bcryptjs.genSalt(10);
-        user.password = await bcryptjs.hash(user.password, salt);
-        next();
-    } catch (error) {
-        console.log(error);
-        throw new Error("Falló el hash de contraseña");
-    }
-});
-*/
-
 userSchema.methods.comparePassword = async function (password) {
     return await  bcrypt.compareSync(password, usuario.password);
 };
-
-
-
-
 
 
 userSchema.pre('save', function(next) {
@@ -65,16 +41,6 @@ const hash = bcrypt.hashSync(user.password, salt);
 user.password = hash;
 next()
 });
-/*, (error, hash) => {
-    user.password = hash
-    next()
-})*/
-
-
-
-
-
-
 
 userSchema.statics.login = login;
 
@@ -96,12 +62,9 @@ function login(correo,password) {
           console.log('El valor de la comparación del password es:',isMatch);
           if (isMatch) {return true}
           else{return false};
-         
-              
-    
+                         
     })}}
   
     
-
 export const usuario = mongoose.model('users', userSchema);
 export default usuario;
